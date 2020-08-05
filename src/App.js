@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom';
 import Container from 'react-bootstrap/Container'
 import NavBar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
@@ -48,18 +48,21 @@ class App extends React.Component {
               <NavBar.Toggle aria-controls='navbar-toggle'/>
               <NavBar.Collapse id='navbar-toggle'>
                 <Nav className='ml-auto'>
-                  <Link className='nav-link' to='/'>Home</Link>
-                  <Link className='nav-link' to='/about'>About</Link>
-                  <Link className='nav-link' to='/projects'>Projects</Link>
-                  <Link className='nav-link' to='/contact'>Contact</Link>
+                  <Link className='nav-link' to='/portfolio'>Home</Link>
+                  <Link className='nav-link' to='/portfolio/about'>About</Link>
+                  <Link className='nav-link' to='/portfolio/projects'>Projects</Link>
+                  <Link className='nav-link' to='/portfolio/contact'>Contact</Link>
                 </Nav>
               </NavBar.Collapse>
             </NavBar>
 
-            <Route path='/' exact render={() => <HomePage title={this.state.home.title}/>}/>
-            <Route path='/about' exact render={() => <AboutPage title={this.state.about.title} text={this.state.about.text}/>}/>
-            <Route path='/contact' exact render={() => <ContactPage title={this.state.contact.title}/>}/>
-            <Route path='/projects' exact render={() => <ProjectsPage title={this.state.projects.title}/>}/>
+            <Route path='/'>
+              <Redirect to="/portfolio" />
+            </Route>
+            <Route path='/portfolio' exact render={() => <HomePage title={this.state.home.title}/>}/>
+            <Route path='/portfolio/about' exact render={() => <AboutPage title={this.state.about.title} text={this.state.about.text}/>}/>
+            <Route path='/portfolio/contact' exact render={() => <ContactPage title={this.state.contact.title}/>}/>
+            <Route path='/portfolio/projects' exact render={() => <ProjectsPage title={this.state.projects.title}/>}/>
 
             <Footer/>
         </Container>
